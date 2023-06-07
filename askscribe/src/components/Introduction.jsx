@@ -1,14 +1,13 @@
 import React from 'react'
-import { Button } from 'flowbite-react';
-import { Accordion } from 'flowbite-react';
+import Information from './Information'
+import Image from './Image'
 
 const Introduction = () => {
   return (
-    <div>Introduction
-      <Button className=''>Click me</Button>
-
+    <div className='flex content-center h-full'>
+      <Information />
+      <Image />
     </div>
-
   )
 }
 

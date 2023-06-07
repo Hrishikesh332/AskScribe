@@ -8,10 +8,8 @@ function App() {
 
   return (
     <>
-      <div className="">
-      </div>
-      <h2>Hellojhiih</h2>
       <Header />
+      <hr className='border-t-2'></hr>
       <Introduction />
     </>
   )
