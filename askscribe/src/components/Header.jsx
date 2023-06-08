@@ -2,8 +2,10 @@
 import React from 'react'
 import { Navbar } from 'flowbite-react';
 import { Button } from 'flowbite-react';
+import Login from './Login';
 
-const Header = () => {
+const Header = (statechange) => {
+
   return (
   <>
     <Navbar fluid rounded>
@@ -14,7 +16,7 @@ const Header = () => {
     </Navbar.Brand>
 
     <div className="flex md:order-2">
-      <Button>Sign Up</Button>
+      <Button onClick={statechange}>Sign Up</Button>
       <Navbar.Toggle />
     </div>
 
