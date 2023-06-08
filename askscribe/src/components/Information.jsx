@@ -4,10 +4,11 @@ import React from 'react'
 const Information = () => {
   return (
     <>
-    <div className='ml-8 mt-10 w-7/12 leading-10'>
+    <div className='ml-10 mt-12 w-7/12 leading-10'>
       <p className='font-mono font-bold text-5xl'>Your AI Research Assistant</p>
-      <p className='text-1xl my-4'>AskScribe - Navigate PDF in a new way</p>
+      <p className='text-1xl my-5'>AskScribe - Navigate PDF in a new way</p>
       <ul className='text-1xl list-disc ml-4'>
+        <li>AskScribe is here to revolutionize the way you interact with PDF files.</li>
         <li>Do hours worth of reading and understanding in minutes</li>
         <li>Ask follow-up questions and get instant answers</li>
         <li>A new way to search and find relevant papers without specifying keywords</li>
