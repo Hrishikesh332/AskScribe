@@ -6,17 +6,12 @@ import { Card, Button, Checkbox, Label, TextInput} from 'flowbite-react';
 const Login = () => {
   const [page, setPage] = useState(true);
 
-  const signup = (e) => {
-    // e.preventDefault();
-    setPage(!page);
-  }
-  let togglesignup = page? 'visible'  : 'invisible';
 
 return (
   <>
-    <div className={`mt-10 ${togglesignup}`}>
+    <div className={`mt-10`}>
     <Card className='w-80 m-auto relative'>
-        <Button color='light' className='h-20 w-12 absolute close-login'><img src='/close.png' alt='close' style={{height:10, width:10}}></img></Button>
+        <a href='/'><Button color='light' className='h-20 w-12 absolute close-login'><img src='/close.png' alt='close' style={{height:10, width:10}}></img></Button></a>
         <p className='m-auto mt-5 font-semibold'>LOGIN</p>
         <form className="flex flex-col gap-4">
         <div>
@@ -44,7 +39,7 @@ return (
 
         <Button type="submit">Submit</Button>
 
-        <Button type="submit" color='light' className='border-0 w-fit m-auto' onClick={signup}>SignUp</Button>
+        <a href='/signup'><Button color='light' className='border-0 w-fit m-auto'>Sign Up</Button></a>
         </form>
     </Card>
 

@@ -4,9 +4,9 @@ import { Card, Button, Checkbox, Label, TextInput} from 'flowbite-react';
 
 const SignUp = () => {
   return (
-    <div className='w-screen h-screen mt-14 mb-2 invisible'>
+    <div className='w-screen h-screen  mt-8 mb-2'>
     <Card className='w-80 m-auto relative'>
-        <Button color='light' className='h-20 w-12 absolute close-login'><img src='/close.png' alt='close' style={{height:10, width:10}}></img></Button>
+        <a href='/'><Button color='light' className='h-20 w-12 absolute close-login'><img src='/close.png' alt='close' style={{height:10, width:10}}></img></Button></a>
         <p className='m-auto mt-5 font-semibold'>SIGN UP</p>
         <form className="flex flex-col gap-4">
 
@@ -38,7 +38,7 @@ const SignUp = () => {
 
         <Button type="submit">Submit</Button>
 
-        <Button type="submit" color='light' className='border-0 w-fit m-auto'>Login</Button>
+        <a href='/login'><Button color='light' className='border-0 w-fit m-auto'>Login</Button></a>
 
         </form>
     </Card>

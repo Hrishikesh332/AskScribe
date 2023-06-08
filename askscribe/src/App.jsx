@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import './scss/main.scss'
 
 import Header from './components/Header'
@@ -7,19 +7,18 @@ import About from './components/About'
 import Services from './components/Services'
 import Footerpage from './components/Footerpage'
 
-// import Signup from './components/SignUp'
+import Login from './components/Login'
+import Signup from './components/SignUp'
+
+import {Routes, Route} from 'react-router-dom'
 
 function App() {
-
-  const [page,setPage] = useState(true);
-  const statechange = (e) => {
-    setPage(!page);
-  }
-  
     return (
       <>
-      <div className='h-full relative'>
-      <Header change={statechange}/>
+      <Routes>
+      <Route path='' element={
+      <><div className='h-full relative'>
+      <Header/>
       <hr className='border-t-2'></hr>
       <Introduction />
       </div>
@@ -27,6 +26,10 @@ function App() {
       <About />
       <Services />
       <Footerpage />
+      </>}></Route>
+      <Route path='/login' element={<Login />}/>
+      <Route path='/signup' element={<Signup />}/>
+      </Routes>
       </>
       
     )
