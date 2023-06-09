@@ -10,7 +10,7 @@ const About = () => {
     <Card href="#" className='height-card w-2/5 my-auto' >
     <div className='flex mt-4' >
       <img src='/logo.ico' style={{ width: 20, height: 20 }} className='mr-2 mt-1'></img>
-      <h5 className=" text-xl  font-bold tracking-tight text-gray-900 dark:text-white">about</h5>
+      <h5 className=" text-xl  font-bold tracking-tight text-gray-900 dark:text-white">about us</h5>
     </div>
 
   <p className="font-normal  text-gray-950 dark:text-gray-400">

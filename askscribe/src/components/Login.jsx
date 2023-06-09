@@ -25,8 +25,7 @@ return (
           value="Your password"
         />
         </div>
-     
-        <TextInput id="password1" required type="password" />
+        <TextInput id="password" required type="password" />
         </div>
        
         <div className="flex items-center gap-2">

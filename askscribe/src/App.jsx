@@ -21,7 +21,7 @@ function App() {
         
       <Route path='' element={
       <><div className='h-full relative'>
-      <Header change=''/>
+      <Header change='' logout='hidden'/>
       <hr className='border-t-2'></hr>
       <Introduction />
       </div>
