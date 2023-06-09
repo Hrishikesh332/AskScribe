@@ -13,7 +13,7 @@ const About = () => {
       <h5 className=" text-xl  font-bold tracking-tight text-gray-900 dark:text-white">about us</h5>
     </div>
 
-  <p className="font-normal  text-gray-950 dark:text-gray-400">
+  <p className="font-normal  text-gray-950">
     <ol className='list-decimal leading-8 font-normal ml-6'>
       <li>Are you tired of wasting time scrolling through lengthy PDF documents, searching for specific information?</li>
       <li>AskScribe is here to revolutionize the way you interact with PDF files ⚡️.</li>

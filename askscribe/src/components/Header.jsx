@@ -20,7 +20,7 @@ const Header = ({change, logout}) => {
     </div>
 
     <div className={`flex md:order-2 ${logout}`}>
-      <a href='/login'><Button>Log Out</Button></a>
+      <a href='/login'><Button gradientMonochrome="failure">Log Out</Button></a>
       <Navbar.Toggle />
     </div>
 
