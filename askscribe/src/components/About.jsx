@@ -4,7 +4,7 @@ import { Card } from 'flowbite-react';
 
 const About = () => {
   return (
-    <div className='h-screen w-full flex  justify-center color-card relative'>
+    <div className='h-screen w-full flex  justify-center color-card relative' id='about'>
     <img src='/about1.gif' className='absolute h-40  w-60 about1' ></img>
     <img src='/about2.gif' className='absolute h-40 about2' ></img>
     <Card href="#" className='height-card w-2/5 my-auto' >

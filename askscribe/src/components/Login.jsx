@@ -4,9 +4,6 @@ import { useState } from 'react';
 import { Card, Button, Checkbox, Label, TextInput} from 'flowbite-react';
 
 const Login = () => {
-  const [page, setPage] = useState(true);
-
-
 return (
   <>
     <div className={`mt-10`}>

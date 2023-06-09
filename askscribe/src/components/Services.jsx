@@ -2,7 +2,7 @@ import React from 'react'
 
 const Services = () => {
   return (
-    <div className='my-10 m-2 p-5 rounded border-solid border-2 border-gray-200'>
+    <div className='my-10 m-2 p-5 rounded border-solid border-2 border-gray-200' id='services'>
       <p className='font-bold text-3xl my-6 ml-4'>A Better Way</p>
       <ul className='leading-9 mb-8 ml-6'>
         <li>💬 <bold className='font-semibold'>PDF Chat like Experience:</bold> Offers a chat like interface that allows users to interact with PDF files in a conversational manner, making it intuitive and user friendly.</li>

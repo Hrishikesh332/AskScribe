@@ -10,15 +10,18 @@ import Footerpage from './components/Footerpage'
 import Login from './components/Login'
 import Signup from './components/SignUp'
 
+import User from './components/User'
+
 import {Routes, Route} from 'react-router-dom'
 
 function App() {
     return (
       <>
       <Routes>
+        
       <Route path='' element={
       <><div className='h-full relative'>
-      <Header/>
+      <Header change=''/>
       <hr className='border-t-2'></hr>
       <Introduction />
       </div>
@@ -26,9 +29,12 @@ function App() {
       <About />
       <Services />
       <Footerpage />
-      </>}></Route>
+      </>}/>
+
       <Route path='/login' element={<Login />}/>
       <Route path='/signup' element={<Signup />}/>
+      <Route path='/loggedin' element={<User />}/>
+
       </Routes>
       </>
       

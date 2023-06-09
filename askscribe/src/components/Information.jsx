@@ -19,7 +19,7 @@ const Information = () => {
             <img src='/search.jpg'></img>
         </button>
       </div>
-      <Button color='purple' className='m-2 mt-6'>Upload PDF</Button>
+      <a href='/login'><Button color='purple' className='m-2 mt-6'>Upload PDF</Button></a>
     </div>
     </>
   )

@@ -3,7 +3,7 @@ import React from 'react'
 import { Navbar } from 'flowbite-react';
 import { Button } from 'flowbite-react';
 
-const Header = () => {
+const Header = ({change}) => {
 
   return (
   <>
@@ -14,22 +14,22 @@ const Header = () => {
       <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">AskScribe</span>
     </Navbar.Brand>
 
-    <div className="flex md:order-2">
-      <Button><a href='/login'>Login</a></Button>
+    <div className={`flex md:order-2 ${change}`}>
+      <a href='/login'><Button>Login</Button></a>
       <Navbar.Toggle />
     </div>
 
     <Navbar.Collapse>
-    <Navbar.Link active href="#">
+    <Navbar.Link active href="/">
       <p>Home</p>
     </Navbar.Link>
-    <Navbar.Link href="#">
+    <Navbar.Link href="#about">
       About
     </Navbar.Link>
-    <Navbar.Link href="#">
+    <Navbar.Link href="#services">
       Services
     </Navbar.Link>
-    <Navbar.Link href="#">
+    <Navbar.Link href="#contact">
       Contact
     </Navbar.Link>
     </Navbar.Collapse>
