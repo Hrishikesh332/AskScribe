@@ -17,6 +17,7 @@
     "flowbite": "^1.6.5",
     "flowbite-react": "^0.4.7",
     "jsonwebtoken": "^9.0.0",
+    "jwt-decode": "^3.1.2",
     "mongodb": "^5.6.0",
     "mongoose": "^7.2.3",
     "nodemailer": "^6.9.3",

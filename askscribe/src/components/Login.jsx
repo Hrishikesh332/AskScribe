@@ -3,14 +3,18 @@ import React from 'react'
 import { useState } from 'react';
 import { Card, Button, Checkbox, Label, TextInput} from 'flowbite-react';
 
+import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [lemail, setEmail] = useState('');
+  const [lpassword, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const [femail, fpassword] = [email, password];
+    const [femail, fpassword] = [lemail, lpassword];
     fetch("http://localhost:5000/login-user",{
       method:"POST",
       crossDomain:true,
@@ -24,12 +28,17 @@ const Login = () => {
         fpassword
       }),
     })
-    .then((res)=>{
-      alert(res.json);
-    })
+    .then((res)=>res.json())
     .then((data)=>{
-      console.log(data, 'userRegister');
-      navigate('/loggedin');
+      if(data.status=='ok'){
+        navigate('/loggedin', { state: {data} });
+      }
+      else if(data.status=='error'){
+        alert("Wrong Password");
+      }
+      else{
+        alert('Wrong User Credentials');
+      }
     });
   };
 
@@ -43,24 +52,24 @@ return (
 
         <div>
         <div className="mb-2 block">
-        <Label htmlFor="email" value="Your email"/>
+        <Label htmlFor="lemail" value="Your email"/>
         </div>
-        <TextInput id="email" placeholder="name@gmail.com" required type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+        <TextInput id="lemail" placeholder="name@gmail.com" required type="email" value={lemail} onChange={(e) => setEmail(e.target.value)}/>
         </div>
 
         <div>
         <div className="mb-2 block">
         <Label
-          htmlFor="password"
+          htmlFor="lpassword"
           value="Your password"
         />
         </div>
-        <TextInput id="password" required type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <TextInput id="lpassword" required type="password" value={lpassword} onChange={(e) => setPassword(e.target.value)} />
         </div>
        
         <div className="flex items-center gap-2">
-        <Checkbox id="remember" />
-        <Label htmlFor="remember">Remember me</Label>
+        <Checkbox id="lremember" />
+        <Label htmlFor="lremember">Remember me</Label>
         </div>
 
         <Button type="submit">Submit</Button>

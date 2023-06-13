@@ -6,9 +6,25 @@ import About from './About'
 import Services from './Services'
 import { Button } from 'flowbite-react'
 import { Dropdown } from 'flowbite-react'
+import { useState, useEffect } from 'react'
+
+import { useLocation } from 'react-router-dom'
+
+import jwt_decode from "jwt-decode";
+
 
 const User = () => {
+  const [data, setData] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    setData(jwt_decode(location.state.data.data));
+    console.log(data)
+  },[location]);
+
+  const fname = data.fname;
   let name = 'Sample.pdf'
+  
   return (
     <>
       <Header change='hidden' logout=''/>

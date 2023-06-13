@@ -13,7 +13,7 @@ const Signup = () => {
   const handleSignup = (e) => {
     e.preventDefault();
     const [fusername, femail, fpassword] = [username, email, password];
-    // console.log([fusername, femail, fpassword])
+
     fetch("http://localhost:5000/register",{
       method:"POST",
       crossDomain:true,
@@ -31,7 +31,6 @@ const Signup = () => {
     .then((res)=>res.json())
     .then((data)=>{
       if(data.status=='ok'){
-        console.log(data.status);
         navigate('/loggedin');
       }
       else if(data.status==undefined){

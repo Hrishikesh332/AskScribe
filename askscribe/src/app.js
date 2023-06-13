@@ -10,6 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
+
 // var nodemailer = require("nodemailer");
 
 const JWT_SECRET = "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
@@ -53,14 +54,17 @@ app.post("/register", async (req, res) => {
 
 
 app.post("/login-user", async (req, res) => {
-  const { email, password } = req.body;
+  const {femail, fpassword} = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ femail });
+ 
   if (!user) {
     return res.json({ error: "User Not found" });
   }
-  if (await bcrypt.compare(password, user.password)) {
-    const token = jwt.sign({ email: user.email }, JWT_SECRET, {
+  // console.log('hi ',user);
+
+  if (await bcrypt.compare(fpassword, user.fpassword)) {
+    const token = jwt.sign({ femail: user.femail, fname: user.fusername }, JWT_SECRET, {
       expiresIn: "15m",
     });
 
@@ -72,8 +76,6 @@ app.post("/login-user", async (req, res) => {
   }
   res.json({ status: "error", error: "Invalid Password" });
 });
-
-
 
 
 app.post("/userData", async (req, res) => {
