@@ -10,7 +10,27 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    
+    const [femail, fpassword] = [email, password];
+    fetch("http://localhost:5000/login-user",{
+      method:"POST",
+      crossDomain:true,
+      headers:{
+        "content-type":"application/json",
+        Accept:"application/json",
+        "Access-Control-Allow-Origin":"*",
+      },
+      body:JSON.stringify({
+        femail,
+        fpassword
+      }),
+    })
+    .then((res)=>{
+      alert(res.json);
+    })
+    .then((data)=>{
+      console.log(data, 'userRegister');
+      navigate('/loggedin');
+    });
   };
 
 return (

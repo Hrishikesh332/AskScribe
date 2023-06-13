@@ -28,12 +28,15 @@ const Signup = () => {
         fpassword
       }),
     })
-    .then((res)=>{
-      alert(res.json);
-    })
+    .then((res)=>res.json())
     .then((data)=>{
-      console.log(data, 'userRegister');
-      navigate('/loggedin');
+      if(data.status=='ok'){
+        console.log(data.status);
+        navigate('/loggedin');
+      }
+      else if(data.status==undefined){
+        console.log('User Already Exists')
+      }
     });
     
   };
