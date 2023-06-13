@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 const app = express();
 import mongoose from 'mongoose';
 app.use(express.json());
@@ -25,32 +25,32 @@ mongoose
   })
   .catch((e) => console.log(e));
 
-// require("./userDetails");
 
 import './userDetails.js';
 
 const User = mongoose.model("UserInfo");
 
 app.post("/register", async (req, res) => {
-  const { fusername, email, password} = req.body;
+  const { fusername, femail, fpassword} = req.body;
 
-  const encryptedPassword = await bcrypt.hash(password, 10);
+  const encryptedPassword = await bcrypt.hash(fpassword, 10);
   try {
-    const oldUser = await User.findOne({ email });
+    const oldUser = await User.findOne({ femail });
 
     if (oldUser) {
       return res.json({ error: "User Exists" });
     }
     await User.create({
       fusername,
-      email,
-      password: encryptedPassword,
+      femail,
+      fpassword: encryptedPassword,
     });
     res.send({ status: "ok" });
   } catch (error) {
     res.send({ status: "error" });
   }
 });
+
 
 app.post("/login-user", async (req, res) => {
   const { email, password } = req.body;
@@ -70,8 +70,11 @@ app.post("/login-user", async (req, res) => {
       return res.json({ error: "error" });
     }
   }
-  res.json({ status: "error", error: "InvAlid Password" });
+  res.json({ status: "error", error: "Invalid Password" });
 });
+
+
+
 
 app.post("/userData", async (req, res) => {
   const { token } = req.body;

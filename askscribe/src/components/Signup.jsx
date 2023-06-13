@@ -1,30 +1,24 @@
 'use client';
 import React, { useState } from 'react'
 import { Card, Button, Checkbox, Label, TextInput} from 'flowbite-react';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
 
   const [username, setUsername] = useState('hi');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  // constructor(props){
-  //   super(props);
-  //   this.state={
-  //     email = email,
-  //     password = '',
-  //   };
-  // }
-
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
     const [fusername, femail, fpassword] = [username, email, password];
-    console.log([fusername, femail, fpassword])
+    // console.log([fusername, femail, fpassword])
     fetch("http://localhost:5000/register",{
       method:"POST",
       crossDomain:true,
       headers:{
-        "Content-Type":"application/json",
+        "content-type":"application/json",
         Accept:"application/json",
         "Access-Control-Allow-Origin":"*",
       },
@@ -34,15 +28,19 @@ const Signup = () => {
         fpassword
       }),
     })
-    .then((res)=>res.json())
-    .then((data)=>{
-      console.log(data, "userRegister");
+    .then((res)=>{
+      alert(res.json);
     })
+    .then((data)=>{
+      console.log(data, 'userRegister');
+      navigate('/loggedin');
+    });
+    
   };
 
   return (
     <div className='w-screen h-screen  mt-8 mb-2'>
-    <Card className='w-80 m-auto relative' onSubmit={handleLogin}>
+    <Card className='w-80 m-auto relative' onSubmit={handleSignup}>
         <a href='/'><Button color='light' className='h-20 w-12 absolute close-login'><img src='/close.png' alt='close' style={{height:10, width:10}}></img></Button></a>
         <p className='m-auto mt-5 font-semibold'>SIGN UP</p>
         <form className="flex flex-col gap-4">
