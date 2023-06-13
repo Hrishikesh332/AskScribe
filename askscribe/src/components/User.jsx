@@ -19,7 +19,6 @@ const User = () => {
 
   useEffect(() => {
     setData(jwt_decode(location.state.data.data));
-    console.log(data)
   },[location]);
 
   const fname = data.fname;
@@ -39,6 +38,7 @@ const User = () => {
         <iframe src={`${name}?zoom=75`} className='w-7/12 h-4/5 border-solid border-violet-900 border-4 rounded' ></iframe>
         <></>
       </div>
+      <p>Welcome {fname}</p>
       <About />
       <Services />
       <Footer />

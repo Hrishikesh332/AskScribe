@@ -46,9 +46,18 @@ app.post("/register", async (req, res) => {
       femail,
       fpassword: encryptedPassword,
     });
-    res.send({ status: "ok" });
-  } catch (error) {
-    res.send({ status: "error" });
+
+  //   res.send({ status: "ok" });
+  // } catch (error) {
+  //   res.send({ status: "error" });
+  // }
+
+  const token = jwt.sign({ femail: femail, fname: fusername }, JWT_SECRET, {
+    expiresIn: "15m",
+  });
+  return res.json({ status: "ok", data: token });
+  }catch(error){
+    res.json({ status: "error" });
   }
 });
 
@@ -76,6 +85,7 @@ app.post("/login-user", async (req, res) => {
   }
   res.json({ status: "error", error: "Invalid Password" });
 });
+
 
 
 app.post("/userData", async (req, res) => {
