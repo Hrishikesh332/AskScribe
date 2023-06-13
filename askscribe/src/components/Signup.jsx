@@ -1,34 +1,71 @@
 'use client';
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, Button, Checkbox, Label, TextInput} from 'flowbite-react';
 
-const SignUp = () => {
+const Signup = () => {
+
+  const [username, setUsername] = useState('hi');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // constructor(props){
+  //   super(props);
+  //   this.state={
+  //     email = email,
+  //     password = '',
+  //   };
+  // }
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const [fusername, femail, fpassword] = [username, email, password];
+    console.log([fusername, femail, fpassword])
+    fetch("http://localhost:5000/register",{
+      method:"POST",
+      crossDomain:true,
+      headers:{
+        "Content-Type":"application/json",
+        Accept:"application/json",
+        "Access-Control-Allow-Origin":"*",
+      },
+      body:JSON.stringify({
+        fusername,
+        femail,
+        fpassword
+      }),
+    })
+    .then((res)=>res.json())
+    .then((data)=>{
+      console.log(data, "userRegister");
+    })
+  };
+
   return (
     <div className='w-screen h-screen  mt-8 mb-2'>
-    <Card className='w-80 m-auto relative'>
+    <Card className='w-80 m-auto relative' onSubmit={handleLogin}>
         <a href='/'><Button color='light' className='h-20 w-12 absolute close-login'><img src='/close.png' alt='close' style={{height:10, width:10}}></img></Button></a>
         <p className='m-auto mt-5 font-semibold'>SIGN UP</p>
         <form className="flex flex-col gap-4">
 
         <div>
         <div className="mb-2 block">
-        <Label htmlFor="name" value="Your name" />
+        <Label htmlFor="username" value="Your name" />                                     
         </div>
-        <TextInput id="name" placeholder="Full name" required type="text" />
+        <TextInput id="username" placeholder="Full name" required type="text" value={username} onChange= {e => setUsername(e.target.value)}/>
         </div>
 
         <div>
         <div className="mb-2 block">
         <Label htmlFor="email" value="Your email" />
         </div>
-        <TextInput id="email" placeholder="name@gmail.com" required type="email" />
+        <TextInput id="email" placeholder="name@gmail.com" required type="email" value={email} onChange={e => setEmail(e.target.value)}/>
         </div>
 
         <div>
         <div className="mb-2 block">
         <Label htmlFor="password" value="Your password" />
         </div>
-        <TextInput id="password" required type="password" />
+        <TextInput id="password" required type="password" value={password} onChange={e => setPassword(e.target.value)} />
         </div>
        
         <div className="flex items-center gap-2">
@@ -47,4 +84,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default Signup

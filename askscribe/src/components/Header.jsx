@@ -7,7 +7,7 @@ const Header = ({change, logout}) => {
 
   return (
   <>
-    <Navbar fluid rounded>
+    <Navbar fluid rounded className='sticky top-0'>
 
     <Navbar.Brand href="/">
       <img className="mr-3 h-6 sm:h-9" src="/logo.ico" alt="AskScribe" />
