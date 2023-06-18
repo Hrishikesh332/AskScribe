@@ -18,9 +18,9 @@ const Signup = () => {
       method:"POST",
       crossDomain:true,
       headers:{
-        "content-type":"application/json",
-        Accept:"application/json",
-        "Access-Control-Allow-Origin":"*",
+      "content-type":"application/json",
+      Accept:"application/json",
+      "Access-Control-Allow-Origin":"*",
       },
       body:JSON.stringify({
         fusername,

@@ -24,17 +24,17 @@ const Header = ({change, logout}) => {
       <Navbar.Toggle />
     </div>
 
-    <Navbar.Collapse>
-    <Navbar.Link active href="/">
+    <Navbar.Collapse className={change}>
+    <Navbar.Link active href="/" className={change}>
       <p>Home</p>
     </Navbar.Link>
-    <Navbar.Link href="#about">
+    <Navbar.Link href="#about" className={change}>
       About
     </Navbar.Link>
-    <Navbar.Link href="#services">
+    <Navbar.Link href="#services" className={change}>
       Services
     </Navbar.Link>
-    <Navbar.Link href="#contact">
+    <Navbar.Link href="#contact" className={change}>
       Contact
     </Navbar.Link>
     </Navbar.Collapse>
