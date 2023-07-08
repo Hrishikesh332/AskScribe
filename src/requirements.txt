@@ -1,19 +1,25 @@
-                React Js Project
+          // React Js Project
 // Use pnpm
+pnpm install
+
 // vite - pnpm create vite@latest 
+
 Tailwind - pnpm install -D tailwind postcss autoprefixer
 Flowbite - pnpm install flowbite flowbite-react
+
 React Router - pnpm add react-roter-dom@latest
+
 Mongoose - pnpm install mongoose
 Node - pnpm install node
 Express - pnpm install express
 Cors - pnpm install cors
 Bcrypt - pnpm install bcryptjs
 NodeMailer - pnpm install nodemailer
+
 Jwt Decoder - pnpm install jwt-decoder
 React Pdf - pmpm install --save react-pdf
 Body Parser - pnpm install body-parser
 
-Run the project - 
+// Run the project - 
 cd askscribe
 pnpm run dev
