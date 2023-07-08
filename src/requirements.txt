@@ -13,3 +13,7 @@ NodeMailer - pnpm install nodemailer
 Jwt Decoder - pnpm install jwt-decoder
 React Pdf - pmpm install --save react-pdf
 Body Parser - pnpm install body-parser
+
+Run the project - 
+cd askscribe
+pnpm run dev
