@@ -9,19 +9,38 @@
     right: 10px;
 }
 
-
 // About
+#about{
+    height: fit-content;
+    padding: 20px 0px;
+}
+
 .color-card{
     background-color: #0B2447;
 }
 .height-card{
-    height: 92vh;
+    height: fit-content;
+    width: 40vw;
 }
 .about1{
-    left: 50px;
-    bottom:50px;
+    position: absolute;
+    left: 20px;
+    bottom:30px;
 }
 .about2{
-    right: 50px;
-    top : 50px;
+    position: absolute;
+    right: 20px;
+    top : 30px;
+}
+
+@media only screen and (max-width: 900px) {
+    .about1{
+        display: none;
+    }
+    .about2{
+        display: none;
+    }
+    .height-card{
+        width: 90vw;
+    }
 }
