@@ -1,7 +1,6 @@
 'use client';
 import React from 'react'
 import { Card } from 'flowbite-react';
-
 const About = () => {
   return (
     <div className='w-full flex justify-center color-card relative' id='about'>
@@ -12,7 +11,6 @@ const About = () => {
       <img src='/logo.ico' style={{ width: 20, height: 20 }} className='mr-2 mt-1'></img>
       <h5 className=" text-xl  font-bold tracking-tight text-gray-900 dark:text-white">about us</h5>
     </div>
-
     <p className="font-normal  text-gray-950">
     <ol className='list-decimal leading-8 font-normal ml-6'>
       <li>Are you tired of wasting time scrolling through lengthy PDF documents, searching for specific information?</li>
@@ -24,9 +22,7 @@ const About = () => {
     </ol>
     </p>
     </Card>  
-
     </div>
   )
 }
-
 export default About

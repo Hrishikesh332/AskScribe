@@ -40,11 +40,9 @@ const Pdf = mongoose.model("PdfDetails");
 
 app.post("/register", async (req, res) => {
   const { fusername, femail, fpassword} = req.body;
-
   const encryptedPassword = await bcrypt.hash(fpassword, 10);
   try {
     const oldUser = await User.findOne({ femail });
-
     if (oldUser) {
       return res.json({ error: "User Exists" });
     }
@@ -66,18 +64,14 @@ app.post("/register", async (req, res) => {
 
 app.post("/login-user", async (req, res) => {
   const {femail, fpassword} = req.body;
-
   const user = await User.findOne({ femail });
- 
   if (!user) {
     return res.json({ error: "User Not found" });
   }
-
   if (await bcrypt.compare(fpassword, user.fpassword)) {
     const token = jwt.sign({ femail: user.femail, fname: user.fusername }, JWT_SECRET, {
       expiresIn: "15m",
     });
-
     if (res.status(201)) {
       return res.json({ status: "ok", data: token });
     } else {
@@ -89,9 +83,24 @@ app.post("/login-user", async (req, res) => {
 
 
 app.post('/upload-pdf',async(req,res)=>{
-  const {base64}=req.body;
+  const {base64, femail}=req.body;
   try {
-    await Pdf.create({pdf:base64});
+    const user = await Pdf.findOne({ femail });
+    if (!user) {
+      await Pdf.create({
+        pdf:[base64],
+        femail,
+      });
+    }else{
+      try{
+        await Pdf.updateOne(
+          {femail: femail},
+          {$push: { pdf:base64 } } )
+      }
+      catch(error){
+        res.send({Status:'Not able to add to pdf', data:error});
+      }
+    }
     res.send({Status:'ok'});
   }catch(error){
     res.send({Status:'error',data:error});

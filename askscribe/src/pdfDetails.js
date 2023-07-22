@@ -2,15 +2,16 @@
 
 import mongoose from "mongoose";
 
-const ImageDetailsSchema = new mongoose.Schema(
+const PdfDetailsSchema = new mongoose.Schema(
   {
-    pdf:String
+    pdf: Array,
+    femail: { type: String, unique: true },
   },
   {
     collection: "pdfdetails",
   }
 );
 
-mongoose.model("PdfDetails", ImageDetailsSchema);
+mongoose.model("PdfDetails", PdfDetailsSchema);
 
 // export default UserDetailsScehma;

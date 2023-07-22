@@ -35,7 +35,7 @@ const User = () => {
           setFilename(reader.result);
         }
         reader.onerror = error => {
-          console.log("errer : ",error);
+          console.log("error : ",error);
         }
   }
 
@@ -53,6 +53,7 @@ const User = () => {
         },
         body:JSON.stringify({
           base64:filename,
+          femail:data.femail,
         })
       })
       .then((res)=>res.json())
