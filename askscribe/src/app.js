@@ -107,6 +107,19 @@ app.post('/upload-pdf',async(req,res)=>{
   }
 })
 
+app.get('/getpdf/:femail', async (req, res) => {
+  const femail  = req.params.femail;
+  try{
+    const user = await Pdf.findOne({ femail });
+    if (!user){
+      return res.json({ status: "error", error:'No Pdf Exists' });
+    }
+    res.send({status:'ok', data:user.pdf});
+  }catch (error) {
+    res.json({status:"error", error:"No Pdf Exists"});
+  }
+});
+
 app.listen(5000, () => {
   console.log("Server Started");
 });
