@@ -3,6 +3,7 @@ import Header from './Header'
 import Footer from './Footerpage'
 import About from './About'
 import Services from './Services'
+import ChatBot from './Chatbot';
 import { Button } from 'flowbite-react'
 import { Dropdown } from 'flowbite-react'
 import { useState, useEffect } from 'react'
@@ -16,7 +17,6 @@ const User = () => {
   const [file, setFile] = useState('Sample.pdf');
   const [filename, setFilename] = useState('');
   const [files, setFiles] = useState([]);
-  const [pdflist, setPdflist] = useState([]);
 
   useEffect(() => {
     setData(jwt_decode(location.state.data.data));
@@ -39,7 +39,6 @@ const User = () => {
   }
 
   const handleOpenFile = (id) => {
-    var reader = new FileReader();
     setFile(files[id]);
   }
 
@@ -67,7 +66,6 @@ const User = () => {
   }
 
   async function handleOpen(){
-    let pdfs = []
     await fetch(`http://localhost:5000/getpdf/${data.femail}`, {
       method: 'GET',
       headers: {
@@ -83,29 +81,33 @@ const User = () => {
       .catch(err => console.error(err));
   }
 
+
   return (
     <>
       <Header change='hidden' logout=''/>
-      <div className='h-screen ml-4' >
+      <div className='flex justify-around'>
+      <div className='h-screen ml-4 w-4/6' >
         <div className='flex'>
-        <form className='flex'>
+          <form className='flex'>
           <input type='file' onChange={handleFile}></input>
           <Button color='purple' size='sm' gradientDuoTone="purpleToBlue" outline className='mb-2 mr-4'
           onClick={handleUpload}>Upload PDF</Button>
-        </form>
-        <Dropdown size='sm' label='OPEN PDF'>
+          </form>
+          <Dropdown size='sm' label='OPEN PDF'>
           {files?.map((pdf, i) => {
             return(
               <Dropdown.Item onClick={() => handleOpenFile(i)} key={i}>{i}</Dropdown.Item>
             )
           })}
-        </Dropdown>
-        <a><p className='font-semibold m-2 ml-4 text-violet-900'>{data.fusername}</p></a>
+          </Dropdown>
+          <a><p className='font-semibold m-2 ml-4 text-violet-900'>{data.fusername}</p></a>
         </div>
-        <iframe  src={`${file}#view=fitH`} width={100} height={100}
-         type="application/pdf" className='w-7/12 h-4/5 border-solid border-violet-900 border-4 rounded' ></iframe>
-        <></>
-        {/* src={`${file}?zoom=75`}  */}
+          <iframe  src={`${file}#view=fitH`}
+          type="application/pdf" className='w-full h-4/5 border-solid border-violet-900 border-4 rounded' ></iframe>
+      </div>
+      <div>
+      <ChatBot />
+      </div>
       </div>
       <About />
       <Services />
