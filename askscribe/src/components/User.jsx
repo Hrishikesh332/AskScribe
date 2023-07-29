@@ -22,8 +22,13 @@ const User = () => {
     setData(jwt_decode(location.state.data.data));
   },[location]);
 
+  useEffect(() => {
+    handleOpen()
+  }, [data])
+
   const handleFile = (e) => {
     var reader = new FileReader();
+    console.log(e.target.files[0]);
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       setFilename(reader.result);
@@ -35,9 +40,7 @@ const User = () => {
 
   const handleOpenFile = (id) => {
     var reader = new FileReader();
-    reader.readAsDataURL(files[id]);  
-    setFilename(reader.result);
-    handleUpload()
+    setFile(files[id]);
   }
 
   const handleUpload = (e) => {
@@ -75,15 +78,9 @@ const User = () => {
     })
       .then(response => response.json())
       .then(data => {
-        pdfs = data.data
-        setFiles(pdfs)
+        setFiles(data.data)
       })
       .catch(err => console.error(err));
-    let list = pdfs.map((pdf, index) => { 
-      console.log(index)
-      return <Dropdown.Item onClick={handleOpenFile}>{index}</Dropdown.Item>
-    })
-    setPdflist(list)
   }
 
   return (
@@ -96,12 +93,13 @@ const User = () => {
           <Button color='purple' size='sm' gradientDuoTone="purpleToBlue" outline className='mb-2 mr-4'
           onClick={handleUpload}>Upload PDF</Button>
         </form>
-        <button onClick={handleOpen}>
-            <Dropdown size='sm' label='OPEN PDF'>
-            <Dropdown.Item onClick={handleOpenFile(4)}>Hii</Dropdown.Item>
-            {pdflist}
-            </Dropdown>
-        </button>
+        <Dropdown size='sm' label='OPEN PDF'>
+          {files?.map((pdf, i) => {
+            return(
+              <Dropdown.Item onClick={() => handleOpenFile(i)} key={i}>{i}</Dropdown.Item>
+            )
+          })}
+        </Dropdown>
         <a><p className='font-semibold m-2 ml-4 text-violet-900'>{data.fusername}</p></a>
         </div>
         <iframe  src={`${file}#view=fitH`} width={100} height={100}
