@@ -1,0 +1,46 @@
+// $color : steelblue;
+
+// body{
+//     background-color: $color;
+// }
+
+.close-login{
+    top: 10px;
+    right: 10px;
+}
+
+// About
+#about{
+    height: fit-content;
+    padding: 20px 0px;
+}
+
+.color-card{
+    background-color: #0B2447;
+}
+.height-card{
+    height: fit-content;
+    width: 40vw;
+}
+.about1{
+    position: absolute;
+    left: 20px;
+    bottom:30px;
+}
+.about2{
+    position: absolute;
+    right: 20px;
+    top : 30px;
+}
+
+@media only screen and (max-width: 900px) {
+    .about1{
+        display: none;
+    }
+    .about2{
+        display: none;
+    }
+    .height-card{
+        width: 90vw;
+    }
+}
