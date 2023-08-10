@@ -14,7 +14,7 @@ mongo_url = os.getenv("MONGO")
 client = pymongo.MongoClient(mongo_url)
 db = client.get_database("askscribe")
 user_collection = db["UserInfo"]
-pdf_collection = db["PdfDetails"]
+pdf_collection = db["pdfdetails"]
 
 
 JWT_SECRET = os.getenv("JWT_SECRET")
