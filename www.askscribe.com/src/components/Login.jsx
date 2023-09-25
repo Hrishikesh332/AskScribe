@@ -13,6 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
+    console.log('hii')
     e.preventDefault();
     const [femail, fpassword] = [lemail, lpassword];
     fetch("http://localhost:5000/login-user",{

@@ -52,7 +52,7 @@ const App = () => {
     }
   };
 
-  return (
+  return(
     <div>
       <input type="email" placeholder="Email" onChange={(e) => setFemail(e.target.value)} />
       <input type="password" placeholder="Password" onChange={(e) => setFpassword(e.target.value)} />
