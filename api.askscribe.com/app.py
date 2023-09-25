@@ -16,7 +16,6 @@ db = client.get_database("askscribe")
 user_collection = db["UserInfo"]
 pdf_collection = db["pdfdetails"]
 
-
 JWT_SECRET = os.getenv("JWT_SECRET")
 
 @app.route("/register", methods=["POST"])
