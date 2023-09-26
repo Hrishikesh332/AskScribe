@@ -1,3 +1,5 @@
+// import env from "react-dotenv";
+
 import express, { Router } from 'express';
 const app = express();
 
@@ -17,7 +19,7 @@ import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
-const mongoUrl = "mongodb+srv://root:shetty34@cluster0.5ho67t3.mongodb.net/askscribe";
+const mongoUrl = 'mongodb+srv://root:shetty34@cluster0.5ho67t3.mongodb.net/askscribe';
 
 mongoose
   .connect(mongoUrl, {
@@ -104,6 +106,7 @@ app.post('/upload-pdf',async(req,res)=>{
 })
 
 app.get('/getpdf/:femail', async (req, res) => {
+  
   const femail  = req.params.femail;
   try{
     const user = await Pdf.findOne({ femail });
@@ -115,6 +118,19 @@ app.get('/getpdf/:femail', async (req, res) => {
     res.json({status:"error", error:"No Pdf Exists"});
   }
 });
+
+app.post('/deletepdf', async (req, res) => {
+  const {pdf, femail}=req.body;
+  try{
+    await Pdf.updateOne(
+      {femail: femail},
+      { pdf:pdf }
+    );
+    return res.json({status:'FILE DELETED SUCCESSFULLY'})
+  }catch(error){
+    res.json({status: "error", error:error})
+  }
+})
 
 app.listen(5000, () => {
   console.log("Server Started");

@@ -17,6 +17,7 @@ const User = () => {
   const [file, setFile] = useState('Sample.pdf');
   const [filename, setFilename] = useState('');
   const [files, setFiles] = useState([]);
+  const [fileId, setFileId] = useState(-1);
 
   useEffect(() => {
     setData(jwt_decode(location.state.data.data));
@@ -40,6 +41,7 @@ const User = () => {
 
   const handleOpenFile = (id) => {
     setFile(files[id]);
+    setFileId(id);
   }
 
   const handleUpload = (e) => {
@@ -81,6 +83,31 @@ const User = () => {
       .catch(err => console.error(err));
   }
 
+  async function handleDelete(){
+    if (fileId==-1){
+      alert("No pdf exists.")
+    }
+    files.splice(fileId, 1)
+    await fetch(`http://localhost:5000/deletepdf` ,{
+      method: 'POST',
+      headers: {
+        "Content-Type":"application/json",
+        Accept:"application/json",
+        "Access-Control-Allow-Origin":"*",
+      },
+      body:JSON.stringify({
+        pdf: files,
+        femail:data.femail,
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.status=='FILE DELETED SUCCESSFULLY'){
+        alert('FILE DELETED SUCCESSFULLY')
+      }
+    })
+    .catch(err => console.log(err));
+  }
 
   return (
     <>
@@ -100,7 +127,7 @@ const User = () => {
             )
           })}
           </Dropdown>
-          <a><p className='font-semibold m-2 ml-4 text-violet-900'>{data.fusername}</p></a>
+          <Button size = 'sm' className='ml-4' onClick={handleDelete}>DELETE PDF</Button>
         </div>
           <iframe  src={`${file}#view=fitH`}
           type="application/pdf" className='w-full h-4/5 border-solid border-violet-900 border-4 rounded' ></iframe>
