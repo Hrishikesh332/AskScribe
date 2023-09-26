@@ -19,7 +19,7 @@ import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
-const mongoUrl = 'mongodb+srv://root:shetty34@cluster0.5ho67t3.mongodb.net/askscribe';
+const mongoUrl = 'ADD MONGODB URL HERE';
 
 mongoose
   .connect(mongoUrl, {
