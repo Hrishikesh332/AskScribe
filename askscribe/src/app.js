@@ -18,12 +18,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 
 const JWT_SECRET = "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
-<<<<<<< HEAD
 const mongoUrl = 'mongodb+srv://root:shetty34@cluster0.5ho67t3.mongodb.net/askscribe';
-=======
-
-const mongoUrl = 'ADD MONGODB URL HERE';
->>>>>>> d16f97053610246f3c52eb2c4e4cf19d7b102ad2
 
 mongoose
   .connect(mongoUrl, {
