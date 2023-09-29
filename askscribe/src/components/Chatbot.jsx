@@ -1,82 +1,101 @@
-import React from 'react'
+import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import { ChatContainer, MainContainer, Message, MessageInput, MessageList, TypingIndicator } from "@chatscope/chat-ui-kit-react";
+import OpenAI from "openai";
+import { useState } from "react";
 
-const Chatbot = () => {
+const openai = new OpenAI({
+  apiKey: import.meta.env.VITE_API_KEY,
+  dangerouslyAllowBrowser: true
+});
+
+function Chatbot({Pdf_Content}){
+  const [typing, setTyping] = useState(false);
+  const [messages, setMessages] = useState([
+    {
+      message: "Hii, I am Askscribe a Chatbot! I can help you with pdfs.",
+      sender: "Askscribe"
+    }
+  ])
+
+  const handleSend = async(message) => {
+    const newMessage= {
+      message: message,
+      sender: 'user',
+      direction: "outgoing"
+    }
+    const newMessages = [...messages, newMessage];
+    setMessages(newMessages);
+    setTyping(true)
+    await processMessageToChatGPT(newMessages);
+
+  async function processMessageToChatGPT(chatMessages){
+    let apiMessages = chatMessages.map((messageObject) => {
+      let role = ""
+      if (messageObject.sender==="Askscribe"){
+        role = "assistant"
+      }
+      else{
+        role = "user"
+      }
+      return {role:role, content:messageObject.message}
+    });
+
+    const systemMessage = {
+      role: "system",
+      content: `
+      Your name is Askcribe and you are a Chatbot designed for helping the user to get information from the given Pdf_Content.
+      User will ask you questions and you need to search it in the Pdf_Content and answer the user according to the information
+      present in the Pdf_Content after summarizing it in short or as much user asks for.
+      If anything related to the question is not available in the Pdf_Content inform about it to the user in a good tone.
+      
+      Pdf_Content = ${Pdf_Content}
+  
+      Example: 
+      Example_Pdf_Content = "We've trained a model called ChatGPT which interacts in a conversational way. 
+      The dialogue format makes it possible for ChatGPT to answer followup questions, admit its mistakes, challenge incorrect premises, and reject inappropriate requests."
+      Messages:
+      [
+        {role:'system' , content: "Hii, I am Askscribe a Chatbot! I can help you with pdfs."},
+        {role:'user', content: "Can you give me overview about the pdf?"},
+        {role:'assistant', content:"Sure, Provided pdf introduces about the large large language model Chatgpt, and tells about how it works."},
+        {role:'user', content:"What are the functionalities ?"},
+        {role:'assistant', content:"Chatgpt can answer questions properly according to situations."},
+        {role:'user', content:"Okay, Thank you!"},
+        {role:'assistant', content:"Always welcome, anywaya if you need any other assistant do let me know."}
+      ]
+     `
+    }
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [systemMessage, ...apiMessages],
+    }); 
+
+    const responseMessage = response.choices[0].message.content
+    const newMessage = {
+      message: responseMessage,
+      sender: 'Askscribe'
+    }
+
+    setMessages([...chatMessages, newMessage])
+    setTyping(false)
+  }
+}
+
   return (
-    <div className='h-1/3'>
-      <div className="container mx-auto">
-      <div className=" max-w-2xl border rounded">
-        <div>
-          <div className="w-full">
-            <div className="relative flex items-center p-3 border-b border-gray-300">
-              <img className="object-cover w-10 h-10 rounded-full"
-                src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg" alt="username" />
-              <span className="block ml-2 font-bold text-gray-600">Emma</span>
-              <span className="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
-              </span>
-            </div>
-            <div className="relative w-full p-6 overflow-y-auto h-[40rem]">
-
-              <ul className="space-y-2">
-                <li className="flex justify-start">
-                  <div className="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
-                    <span className="block">Hi</span>
-                  </div>
-                </li>
-                <li className="flex justify-end">
-                  <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
-                    <span className="block">Hiiii</span>
-                  </div>
-                </li>
-                <li className="flex justify-end">
-                  <div className="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
-                    <span className="block">how are you?</span>
-                  </div>
-                </li>
-                <li className="flex justify-start">
-                  <div className="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
-                    <span className="block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. </span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div className="flex items-center justify-between w-full p-3 border-t border-gray-300">
-              <button>
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </button>
-              <button>
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                </svg>
-              </button>
-              <input type="text" placeholder="Message"
-                className="block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
-                name="message" required />
-              <button>
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                </svg>
-              </button>
-              <button type="submit">
-                <svg className="w-5 h-5 text-gray-500 origin-center transform rotate-90" xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20" fill="currentColor">
-                  <path
-                    d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
+    <MainContainer>
+      <ChatContainer>
+        <MessageList
+         typingIndicator = { typing ? <TypingIndicator content = "Asckribe is typing"/> : null }
+         scrollBehavior="smooth" 
+        >
+          {messages.map((message, i) => {
+            return <Message key={i} model={message} />
+          })}
+        </MessageList>
+        <MessageInput placeholder="Type message here" onSend={handleSend} />
+      </ChatContainer>
+    </MainContainer>
   )
 }
 

@@ -1,24 +1,23 @@
 // import env from "react-dotenv";
 
+import bcrypt from 'bcryptjs';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 import express, { Router } from 'express';
+import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
+// require('dotenv').config()
+
 const app = express();
 
-import bodyParser from 'body-parser';
 app.use(bodyParser.json({limit : '10mb'}));
 app.use(bodyParser.urlencoded({extended:true, limit:'10mb'}));
-
-import mongoose from 'mongoose';
 app.use(express.json());
-import cors from 'cors';
 app.use(cors());
-import bcrypt from 'bcryptjs';
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 
-import jwt from 'jsonwebtoken';
-
 const JWT_SECRET = "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
-
 const mongoUrl = 'mongodb+srv://root:shetty34@cluster0.5ho67t3.mongodb.net/askscribe';
 
 mongoose
